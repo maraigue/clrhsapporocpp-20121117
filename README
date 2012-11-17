@@ -1,0 +1,32 @@
+== 何これ ==
+
+文字列buf中のすべての部分文字列を列挙すると、どれだけメモリを食うのか
+検証するためのプログラムです。
+std::stringで部分文字列を取る場合と、fundoshi::stringで部分文字列を取る場合で
+比較をしています。
+
+== 検証環境 ==
+
+gcc4.6.3 + Ubuntu12.04
+
+== 実行方法 ==
+
+$ make get_fundoshi_hpp
+$ make
+$ ./std_string_alloc_memory
+$ ./fundoshi_alloc_memory
+
+std_string_alloc_memoryやfundoshi_alloc_memoryを実行すると、部分文字列を列挙したのち、
+[Memory have been allocated]と表示され、メモリを確保した状態で一旦停止します。
+別のコンソールでtop -p [pid]などとして食ってるメモリを確かめましょう。
+
+その状態からENTERキーを押すと、今度は[Memory have been released]と表示され、
+確保したメモリを解放してから一旦停止します。
+topで表示されたメモリがどれだけ下がったか確認しましょう。
+
+== いじる ==
+
+alloc_memory.cpp中の「std::string buf」を定義している部分を書き換えてみて下さい。
+26文字だとtopでは差は見えませんので。
+（topはメモリ使用量をキロバイト単位で表示するため）
+
